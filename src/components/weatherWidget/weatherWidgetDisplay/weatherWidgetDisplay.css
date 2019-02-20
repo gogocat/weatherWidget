@@ -1,0 +1,33 @@
+.weather-widget-display {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+}
+
+ .weather-widget-display__card {
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    padding: 2em;
+ }
+ .weather-widget-display__info-container {
+     display: flex;
+     height: 100%;
+ }
+ .weather-widget-display__info-container img {
+    align-self: center; 
+ }
+
+ .weather-widget-display__title {
+    text-transform: uppercase;
+ }
+
+ .weather-widget-display__info {
+     align-self: center;
+     padding-left: 1em;
+ }
+
+ .weather-widget-display__temperature {
+     font-weight: 800;
+     font-size: 2.5em;
+ }
+

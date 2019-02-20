@@ -1,0 +1,86 @@
+.weather-widget-form {
+    width: 50%;
+    border-right: 1px solid #c5c5c5;
+}
+
+.weather-widget-form__row {
+    margin-bottom: 1em;
+}
+
+.weather-widget-form__label {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.weather-widget-form__input--text {
+    display: block;
+    border: 1px solid #c5c5c5;
+    padding: 0.5em;
+    border-radius: 4px;
+    width: 90%;
+}
+
+.weather-widget-form__radio-containder {
+    display: inline-block;
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 50%;
+}
+
+.weather-widget-form__radio-containder input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.weather-widget-form__radio-title {
+    font-family: "arial unicode ms","Lucida Sans Unicode",sans-serif
+}
+
+.weather-widget-form__radio-btn {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+}
+
+.weather-widget-form__radio-btn:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.weather-widget-form__radio-containder input:checked ~ .weather-widget-form__radio-btn:after {
+    display: block;
+}
+
+.weather-widget-form__radio-containder .weather-widget-form__radio-btn:after {
+    top: 4px;
+    left: 4px;
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    background: white;
+  }
+
+.weather-widget-form__radio-containder:hover input ~ .weather-widget-form__radio-btn {
+    background-color: #ccc;
+}
+
+.weather-widget-form__radio-containder input:checked ~ .weather-widget-form__radio-btn {
+    background-color: #2196F3;
+    border: 1px solid #2196F3;
+}
+
