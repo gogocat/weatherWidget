@@ -1,6 +1,15 @@
 # Weather Widget
 A simple widget that gets user location and calls OpenWeather API to get lastest weather information
 
+## How to run this app
+```
+git clone https://github.com/gogocat/weatherWidget.git
+
+npm install
+
+npm start
+```
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
