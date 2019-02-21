@@ -16,12 +16,22 @@
     display: flex;
     background-color: #f5f5f5;
     border: 1px solid #c5c5c5;
-    padding: 3em;
+    padding: 1em;
     border-radius: 0 0 8px 8px;
 }
 
 .weather-widget__wrap {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
+}
+
+@media only screen and (min-width: 415px) {
+    .weather-widget__container {
+        padding: 3em;
+    }
+
+    .weather-widget__wrap {
+        flex-direction: row;
+    }
 }

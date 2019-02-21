@@ -112,6 +112,12 @@ const getUserLocalWeatherData = (temperatureType)=> {
                         if (data.wind) {
                             userLocalWeatherData.wind = `${convertWindDegreeToTextual(data.wind.deg)} ${convertMpsToKmh(data.wind.speed || 0)}`;
                         }
+
+                        if (data.weather) {
+                            userLocalWeatherData.weatherIcon = data.weather[0].icon;
+                            userLocalWeatherData.weatherMain = data.weather[0].main;
+                        }
+                        
                         userLocalWeatherData.isLoaded = true;
 
                         resolve(userLocalWeatherData);

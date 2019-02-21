@@ -21,7 +21,9 @@ class WeatherWidget extends Component {
             displayWindInfo: true,
             tempKelvin: 0,
             city: '',
-            wind: ''
+            wind: '',
+            weatherIcon: '',
+            weatherMain: '',
         };
     }
 
@@ -74,6 +76,8 @@ class WeatherWidget extends Component {
                 />
                 <WeatherWidgetDisplay
                     widgetTitle={this.state.widgetTitle}
+                    weatherIcon={this.state.weatherIcon}
+                    weatherMain={this.state.weatherMain}
                     temperature={this.state.temperature}
                     temperatureType={this.state.temperatureType}
                     displayWindInfo={this.state.displayWindInfo}

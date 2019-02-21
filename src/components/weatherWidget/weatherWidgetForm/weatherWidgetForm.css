@@ -1,6 +1,5 @@
 .weather-widget-form {
-    width: 50%;
-    border-right: 1px solid #c5c5c5;
+    border-right: none;
 }
 
 .weather-widget-form__row {
@@ -84,3 +83,9 @@
     border: 1px solid #2196F3;
 }
 
+@media only screen and (min-width: 415px) {
+    .weather-widget-form {
+        width: 50%;
+        border-right: 1px solid #c5c5c5;
+    }
+}

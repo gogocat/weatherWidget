@@ -1,14 +1,13 @@
 .weather-widget-display {
     display: flex;
     justify-content: center;
-    width: 50%;
 }
 
  .weather-widget-display__card {
     background-color: #fff;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    padding: 2em;
-    width: 90%;
+    padding: 1em;
+    width: 100%;
  }
  .weather-widget-display__info-container {
      display: flex;
@@ -32,3 +31,13 @@
      font-size: 2.5em;
  }
 
+ @media only screen and (min-width: 415px) {
+    .weather-widget-display {
+        width: 50%;
+    }
+
+    .weather-widget-display__card {
+        padding: 2em;
+        width: 90%;
+     }
+}
