@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { TEMPERATURE_TYPES } from '../../../constants';
 import './weatherWidgetForm.css';
 
 const WeatherWidgetForm = (props) => {
@@ -19,16 +21,28 @@ const WeatherWidgetForm = (props) => {
                     placeholder="Title of widget"
                 />
             </div>
-            <div className="weather-widget-form__row" onChange={props.setTemperatureType}>
+            <div className="weather-widget-form__row">
                 <label className="weather-widget-form__label">Temperature</label>
                 <label className="weather-widget-form__radio-containder">
                     <span className="weather-widget-form__radio-title">&#8451;</span>
-                    <input type="radio" value="C" defaultChecked name="temperature"/>
+                    <input
+                        type="radio"
+                        value={TEMPERATURE_TYPES.CELSIUS} 
+                        checked={props.temperatureType === TEMPERATURE_TYPES.CELSIUS}
+                        onChange={props.setTemperatureType}
+                        name="temperature"
+                    />
                     <span className="weather-widget-form__radio-btn"></span>
                 </label>
                 <label className="weather-widget-form__radio-containder">
                     <span className="weather-widget-form__radio-title">&#8457;</span>
-                    <input type="radio" value="F" name="temperature"/>
+                    <input
+                        type="radio" 
+                        value={TEMPERATURE_TYPES.FAHRENHEIT} 
+                        checked={props.temperatureType === TEMPERATURE_TYPES.FAHRENHEIT}
+                        onChange={props.setTemperatureType} 
+                        name="temperature"
+                    />
                     <span className="weather-widget-form__radio-btn"></span>
                 </label>
             </div>
@@ -48,6 +62,14 @@ const WeatherWidgetForm = (props) => {
         </div>
     );
 
+};
+
+WeatherWidgetForm.propTypes = {
+    temperatureType: PropTypes.string.isRequired,
+    handleTitleChange: PropTypes.func.isRequired,
+    setTemperatureType: PropTypes.func.isRequired,
+    widgetTitle: PropTypes.string,
+    setDisplayWindInfo: PropTypes.func.isRequired,
 };
 
 export default WeatherWidgetForm;

@@ -1,13 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './weatherWidgetDisplay.css';
 
 const WeatherWidgetDisplay = props => {
     const renderWindInfo = () => {
-        return props.displayWindInfo === 'off' ? null : (
+        return props.displayWindInfo ? (
             <small>
                 <strong>Wind</strong> {props.wind}km/h
             </small>
-        );
+        ) : null;
     };
 
     const temperatureTypeMap = {
@@ -33,6 +34,15 @@ const WeatherWidgetDisplay = props => {
             </div>
         </div>
     );
+};
+
+WeatherWidgetDisplay.propTypes = {
+    displayWindInfo: PropTypes.bool,
+    wind: PropTypes.string,
+    widgetTitle: PropTypes.string,
+    city: PropTypes.string,
+    temperature: PropTypes.number,
+    temperatureType: PropTypes.string,
 };
 
 export default WeatherWidgetDisplay;

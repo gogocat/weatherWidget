@@ -1,3 +1,5 @@
+import { TEMPERATURE_TYPES } from '../../constants';
+
 const googleapiUrl = 'https://maps.googleapis.com/maps/api';
 const googleAPIKey = 'AIzaSyCCcOCD-ujy1JC5Z4FHO5OnNKKDLI7kra4';
 const openWeatherUrl = 'https://api.openweathermap.org/data/2.5/weather';
@@ -77,6 +79,53 @@ const convertWindDegreeToTextual = degree => {
     return textualKeys[direction];
 };
 
+const getUserLocalWeatherData = (temperatureType)=> {
+    const promiseWeatherData = new Promise((resolve, reject)=> {
+        let userLocalWeatherData = {};
+        /*
+        // 1. get user geo location - lat, long
+        // 2. pass to googlemap API to get locaity. eg Sydey
+        // 3. get OpenWeather data using locaity
+        */
+        navigator.geolocation.getCurrentPosition((position) => {
+            getAddressByLatLong(position.coords.latitude, position.coords.longitude)
+                .then(data => {
+                    const locality = getLocality(data);
+                    if (locality) {
+                        return locality;
+                    }
+                })
+                .then(city => {
+                    getWeatherInfoByCity(city).then(data => {
+                        const temp = data.main.temp;
+                        userLocalWeatherData = {
+                            city: city,
+                            tempKelvin: temp
+                        };
+                        console.log('weather data: ', data);
+                        if (temperatureType === TEMPERATURE_TYPES.CELSIUS) {
+                            userLocalWeatherData.temperature = convertKelvinToCelsius(temp);
+                        } else if (temperatureType === TEMPERATURE_TYPES.FAHRENHEIT) {
+                            userLocalWeatherData.temperature = convertKelvinToFahrenheit(temp);
+                        }
+    
+                        if (data.wind) {
+                            userLocalWeatherData.wind = `${convertWindDegreeToTextual(data.wind.deg)} ${convertMpsToKmh(data.wind.speed || 0)}`;
+                        }
+                        userLocalWeatherData.isLoaded = true;
+
+                        resolve(userLocalWeatherData);
+                    });
+                })
+                .catch((err)=> {
+                    reject(err);
+                });
+        });
+    });
+    
+    return promiseWeatherData;
+};
+
 export {
     getAddressByLatLong,
     getLocality,
@@ -84,5 +133,6 @@ export {
     convertKelvinToCelsius,
     convertKelvinToFahrenheit,
     convertWindDegreeToTextual,
-    convertMpsToKmh
+    convertMpsToKmh,
+    getUserLocalWeatherData,
 };

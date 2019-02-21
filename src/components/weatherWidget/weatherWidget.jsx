@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import {
-    getAddressByLatLong,
-    getLocality,
-    getWeatherInfoByCity,
     convertKelvinToCelsius,
     convertKelvinToFahrenheit,
-    convertWindDegreeToTextual,
-    convertMpsToKmh
+    getUserLocalWeatherData
 } from './util';
 import LoadingSpinner from '../loadingSpinner/loadingSpinner';
 import WeatherWidgetForm from './weatherWidgetForm/weatherWidgetForm';
 import WeatherWidgetDisplay from './weatherWidgetDisplay/weatherWidgetDisplay';
+import { TEMPERATURE_TYPES } from '../../constants';
 import './weatherWidget.css';
 
 class WeatherWidget extends Component {
@@ -20,8 +17,8 @@ class WeatherWidget extends Component {
         this.state = {
             isLoaded: false,
             widgetTitle: 'Weather widget',
-            temperatureType: 'C',
-            displayWindInfo: 'on',
+            temperatureType: TEMPERATURE_TYPES.CELSIUS,
+            displayWindInfo: true,
             tempKelvin: 0,
             city: '',
             wind: ''
@@ -30,44 +27,9 @@ class WeatherWidget extends Component {
 
     componentDidMount() {
         const _this = this;
-        let locality = '';
-
-        /*
-        // 1. get user geo location - lat, long
-        // 2. pass to googlemap API to get locaity. eg Sydey
-        // 3. get OpenWeather data using locaity
-        */
-        navigator.geolocation.getCurrentPosition(function(position) {
-            getAddressByLatLong(position.coords.latitude, position.coords.longitude)
-                .then(data => {
-                    locality = getLocality(data);
-                    if (locality) {
-                        return locality;
-                    }
-                })
-                .then(city => {
-                    getWeatherInfoByCity(city).then(data => {
-                        const temp = data.main.temp;
-                        const newState = {
-                            city: locality,
-                            tempKelvin: temp
-                        };
-                        console.log(data);
-                        if (_this.state.temperatureType === 'C') {
-                            newState.temperature = convertKelvinToCelsius(temp);
-                        } else if (_this.state.temperatureType === 'F') {
-                            newState.temperature = convertKelvinToFahrenheit(temp);
-                        }
-
-                        if (data.wind) {
-                            newState.wind = `${convertWindDegreeToTextual(data.wind.deg)} ${convertMpsToKmh(
-                                data.wind.speed || 0
-                            )}`;
-                        }
-                        newState.isLoaded = true;
-                        _this.setState(newState);
-                    });
-                });
+        // get user geolocation and weather data
+        getUserLocalWeatherData(_this.state.temperatureType).then((newWeatherState)=>{
+            _this.setState(newWeatherState);
         });
     }
 
@@ -81,9 +43,9 @@ class WeatherWidget extends Component {
         const temperatureType = e.target.value;
         let temperature = 0;
 
-        if (temperatureType === 'C') {
+        if (temperatureType === TEMPERATURE_TYPES.CELSIUS) {
             temperature = convertKelvinToCelsius(this.state.tempKelvin);
-        } else if (temperatureType === 'F') {
+        } else if (temperatureType === TEMPERATURE_TYPES.FAHRENHEIT) {
             temperature = convertKelvinToFahrenheit(this.state.tempKelvin);
         }
 
@@ -95,7 +57,7 @@ class WeatherWidget extends Component {
 
     setDisplayWindInfo(e) {
         this.setState({
-            displayWindInfo: e.target.value
+            displayWindInfo: e.target.value === 'on'
         });
     }
 
@@ -105,6 +67,7 @@ class WeatherWidget extends Component {
             <div className="weather-widget__wrap">
                 <WeatherWidgetForm
                     widgetTitle={this.state.widgetTitle}
+                    temperatureType={this.state.temperatureType}
                     handleTitleChange={this.handleTitleChange.bind(this)}
                     setTemperatureType={this.setTemperatureType.bind(this)}
                     setDisplayWindInfo={this.setDisplayWindInfo.bind(this)}
