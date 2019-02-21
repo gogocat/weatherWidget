@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing 1`] = `
+Array [
+  <div
+    className="weather-widget"
+  >
+    <div
+      className="weather-widget__container"
+    >
+      <LoadingSpinner />
+    </div>
+  </div>,
+]
+`;
