@@ -42,7 +42,7 @@ const getLocality = data => {
     return ret;
 };
 
-const getWeatherInfoByCity = (locality, unit, country = 'au') => {
+const getWeatherInfoByCity = (locality, country = 'au') => {
     const queryUri = `${openWeatherUrl}?q=${locality},${country}&APPID=${openWeatherAPIID}`;
     return fetch(queryUri).then(function(response) {
         return response.json();
