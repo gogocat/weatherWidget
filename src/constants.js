@@ -2,3 +2,7 @@ export const TEMPERATURE_TYPES = {
     CELSIUS: 'C',
     FAHRENHEIT: 'F',
 };
+
+export const ACTION_TYPES = {
+    GET_USER_LOCAL_WEATHER_DATA: 'GET_USER_LOCAL_WEATHER_DATA'
+};
