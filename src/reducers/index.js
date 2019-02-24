@@ -13,8 +13,8 @@ const initialState = {
 };
 
 function rootReducer(state = initialState, action) {
-    if (action.type === ACTION_TYPES.GET_USER_LOCAL_WEATHER_DATA) {
-        state = {...state, action.payload}
+    if (ACTION_TYPES[action.type]) {
+        return {...state, ...action.payload};
     }
     return state;
 }

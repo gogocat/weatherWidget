@@ -1,4 +1,4 @@
-import ACTION_TYPES from '../constants';
+import { ACTION_TYPES } from '../constants';
 
 export function getUserLocalWeatherData(payload) {
     return {
@@ -6,3 +6,24 @@ export function getUserLocalWeatherData(payload) {
         payload
     };
 };
+
+export function setDisplayWindInfo(payload) {
+    return {
+        type: ACTION_TYPES.SET_DISPLAY_WIND_INFO,
+        payload
+    };
+};
+
+export function setTemperatureType(payload) {
+    return {
+        type: ACTION_TYPES.SET_TEMPERATURE_TYPE,
+        payload
+    };
+};
+
+export function changeWidgetTitle(payload) {
+    return {
+        type: ACTION_TYPES.CHANGE_WIDGET_TITLE,
+        payload
+    };
+}
