@@ -9,3 +9,10 @@ export const ACTION_TYPES = {
     SET_TEMPERATURE_TYPE: 'SET_TEMPERATURE_TYPE',
     CHANGE_WIDGET_TITLE: 'CHANGE_WIDGET_TITLE',
 };
+
+export const temperatureTypeMap = {
+    C: '&#176;',
+    F: '&#8457;'
+};
+
+export const weatherIconUrl = 'https://openweathermap.org/img/w/';
