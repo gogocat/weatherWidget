@@ -39,9 +39,9 @@ class WeatherWidget extends Component {
         let temperature = 0;
 
         if (temperatureType === TEMPERATURE_TYPES.CELSIUS) {
-            temperature = convertKelvinToCelsius(this.state.tempKelvin);
+            temperature = convertKelvinToCelsius(this.props.tempKelvin);
         } else if (temperatureType === TEMPERATURE_TYPES.FAHRENHEIT) {
-            temperature = convertKelvinToFahrenheit(this.state.tempKelvin);
+            temperature = convertKelvinToFahrenheit(this.props.tempKelvin);
         }
 
         this.props.setTemperatureType({
