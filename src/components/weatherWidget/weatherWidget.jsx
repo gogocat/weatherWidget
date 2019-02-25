@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getWeatherData, setDisplayWindInfo, setTemperatureType, changeWidgetTitle } from '../../actions/index';
 import { convertKelvinToCelsius, convertKelvinToFahrenheit } from '../../util/index';
@@ -13,12 +14,12 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToPros = dispatch => {
-    return {
+    return bindActionCreators({
         getWeatherData,
         setDisplayWindInfo,
         setTemperatureType,
         changeWidgetTitle
-    };
+    }, dispatch);
 };
 
 class WeatherWidget extends Component {

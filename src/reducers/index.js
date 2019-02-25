@@ -1,7 +1,7 @@
 import { TEMPERATURE_TYPES, ACTION_TYPES } from '../constants';
 
 const initialState = {
-    isLoaded: false,
+    isLoaded: true,
     widgetTitle: 'Weather widget',
     temperatureType: TEMPERATURE_TYPES.CELSIUS,
     displayWindInfo: true,
