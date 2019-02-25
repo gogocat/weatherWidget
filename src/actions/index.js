@@ -8,7 +8,7 @@ export function getWeatherData() {
         return getUserLocalWeatherData(currentState.temperatureType).then(newWeatherState => {
             dispatch({
                 type: ACTION_TYPES.GET_USER_LOCAL_WEATHER_DATA,
-                newWeatherState
+                payload: newWeatherState
             });
         });
     };

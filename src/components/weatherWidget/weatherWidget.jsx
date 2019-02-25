@@ -9,24 +9,11 @@ import WeatherWidgetDisplay from './weatherWidgetDisplay/weatherWidgetDisplay';
 import { TEMPERATURE_TYPES } from '../../constants';
 import './weatherWidget.css';
 
-const mapStateToProps = state => {
-    return { ...state };
-};
-
-const mapDispatchToPros = dispatch => {
-    return bindActionCreators({
-        getWeatherData,
-        setDisplayWindInfo,
-        setTemperatureType,
-        changeWidgetTitle
-    }, dispatch);
-};
-
 class WeatherWidget extends Component {
     componentDidMount() {
         console.log('this.props: ', this.props);
         // get user geolocation and weather data
-        this.props.getWeatherData(this.props.temperatureType);
+        this.props.getWeatherData();
     }
 
     onWidgetTitleChange(e) {
@@ -88,6 +75,19 @@ class WeatherWidget extends Component {
         );
     }
 }
+
+const mapStateToProps = state => {
+    return { ...state };
+};
+
+const mapDispatchToPros = dispatch => {
+    return bindActionCreators({
+        getWeatherData,
+        setDisplayWindInfo,
+        setTemperatureType,
+        changeWidgetTitle
+    }, dispatch);
+};
 
 export default connect(
     mapStateToProps,
