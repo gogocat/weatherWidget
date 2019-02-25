@@ -1,4 +1,4 @@
-import { TEMPERATURE_TYPES } from '../../constants';
+import { TEMPERATURE_TYPES } from '../constants';
 
 const googleapiUrl = 'https://maps.googleapis.com/maps/api';
 const googleAPIKey = 'AIzaSyCCcOCD-ujy1JC5Z4FHO5OnNKKDLI7kra4';

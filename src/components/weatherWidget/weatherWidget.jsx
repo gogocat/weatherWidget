@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import {
-    convertKelvinToCelsius,
-    convertKelvinToFahrenheit,
-    getUserLocalWeatherData
-} from './util';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { getWeatherData, setDisplayWindInfo, setTemperatureType, changeWidgetTitle } from '../../actions/index';
+import { convertKelvinToCelsius, convertKelvinToFahrenheit } from '../../util/index';
 import LoadingSpinner from '../loadingSpinner/loadingSpinner';
 import WeatherWidgetForm from './weatherWidgetForm/weatherWidgetForm';
 import WeatherWidgetDisplay from './weatherWidgetDisplay/weatherWidgetDisplay';
@@ -11,90 +10,86 @@ import { TEMPERATURE_TYPES } from '../../constants';
 import './weatherWidget.css';
 
 class WeatherWidget extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            isLoaded: false,
-            widgetTitle: 'Weather widget',
-            temperatureType: TEMPERATURE_TYPES.CELSIUS,
-            displayWindInfo: true,
-            tempKelvin: 0,
-            city: '',
-            wind: '',
-            weatherIcon: '',
-            weatherMain: '',
-        };
-    }
-
     componentDidMount() {
-        const _this = this;
+        console.log('this.props: ', this.props);
         // get user geolocation and weather data
-        getUserLocalWeatherData(_this.state.temperatureType).then((newWeatherState)=>{
-            _this.setState(newWeatherState);
-        });
+        this.props.getWeatherData();
     }
 
-    handleTitleChange(e) {
-        this.setState({
+    onWidgetTitleChange(e) {
+        this.props.changeWidgetTitle({
             widgetTitle: e.target.value
         });
     }
 
-    setTemperatureType(e) {
+    onTemperatureTypeChange(e) {
         const temperatureType = e.target.value;
         let temperature = 0;
 
         if (temperatureType === TEMPERATURE_TYPES.CELSIUS) {
-            temperature = convertKelvinToCelsius(this.state.tempKelvin);
+            temperature = convertKelvinToCelsius(this.props.tempKelvin);
         } else if (temperatureType === TEMPERATURE_TYPES.FAHRENHEIT) {
-            temperature = convertKelvinToFahrenheit(this.state.tempKelvin);
+            temperature = convertKelvinToFahrenheit(this.props.tempKelvin);
         }
 
-        this.setState({
+        this.props.setTemperatureType({
             temperatureType: temperatureType,
             temperature: temperature
         });
     }
 
-    setDisplayWindInfo(e) {
-        this.setState({
+    onDisplayWindInfoChange(e) {
+        this.props.setDisplayWindInfo({
             displayWindInfo: e.target.value === 'on'
         });
     }
 
     render() {
-        const spinner = <LoadingSpinner/>;
+        const spinner = <LoadingSpinner />;
         const widget = (
             <div className="weather-widget__wrap">
                 <WeatherWidgetForm
-                    widgetTitle={this.state.widgetTitle}
-                    temperatureType={this.state.temperatureType}
-                    handleTitleChange={this.handleTitleChange.bind(this)}
-                    setTemperatureType={this.setTemperatureType.bind(this)}
-                    setDisplayWindInfo={this.setDisplayWindInfo.bind(this)}
+                    widgetTitle={this.props.widgetTitle}
+                    temperatureType={this.props.temperatureType}
+                    handleTitleChange={this.onWidgetTitleChange.bind(this)}
+                    setTemperatureType={this.onTemperatureTypeChange.bind(this)}
+                    setDisplayWindInfo={this.onDisplayWindInfoChange.bind(this)}
                 />
                 <WeatherWidgetDisplay
-                    widgetTitle={this.state.widgetTitle}
-                    weatherIcon={this.state.weatherIcon}
-                    weatherMain={this.state.weatherMain}
-                    temperature={this.state.temperature}
-                    temperatureType={this.state.temperatureType}
-                    displayWindInfo={this.state.displayWindInfo}
-                    city={this.state.city}
-                    wind={this.state.wind}
+                    widgetTitle={this.props.widgetTitle}
+                    weatherIcon={this.props.weatherIcon}
+                    weatherMain={this.props.weatherMain}
+                    temperature={this.props.temperature}
+                    temperatureType={this.props.temperatureType}
+                    displayWindInfo={this.props.displayWindInfo}
+                    city={this.props.city}
+                    wind={this.props.wind}
                 />
             </div>
         );
-        
+
         return (
             <div className="weather-widget">
-                <div className="weather-widget__container">
-                    {(!this.state.isLoaded) ? spinner : widget}
-                </div>
+                <div className="weather-widget__container">{!this.props.isLoaded ? spinner : widget}</div>
             </div>
         );
     }
 }
 
-export default WeatherWidget;
+const mapStateToProps = state => {
+    return { ...state };
+};
+
+const mapDispatchToPros = dispatch => {
+    return bindActionCreators({
+        getWeatherData,
+        setDisplayWindInfo,
+        setTemperatureType,
+        changeWidgetTitle
+    }, dispatch);
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToPros
+)(WeatherWidget);

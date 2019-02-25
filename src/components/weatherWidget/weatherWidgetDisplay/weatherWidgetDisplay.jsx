@@ -1,13 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './weatherWidgetDisplay.css';
-
-const temperatureTypeMap = {
-    C: '&#176;',
-    F: '&#8457;'
-};
-
-const weatherIconUrl = 'https://openweathermap.org/img/w/';
+import { temperatureTypeMap, weatherIconUrl } from '../../../constants';
 
 const WeatherWidgetDisplay = props => {
     const renderWindInfo = () => {
@@ -46,7 +40,7 @@ WeatherWidgetDisplay.propTypes = {
     temperature: PropTypes.number,
     temperatureType: PropTypes.string,
     weatherIcon: PropTypes.string,
-    weatherMain: PropTypes.string,
+    weatherMain: PropTypes.string
 };
 
 export default WeatherWidgetDisplay;
