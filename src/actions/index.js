@@ -3,7 +3,7 @@ import { getUserLocalWeatherData } from '../util/index'
 
 export function getWeatherData() {
     return function(dispatch, getState) {
-        console.log('getUserLocalWeatherData state: ', getState());
+        // console.log('getUserLocalWeatherData state: ', getState());
         const currentState = getState();
         return getUserLocalWeatherData(currentState.temperatureType).then(newWeatherState => {
             dispatch({

@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders match snapshot 1`] = `
+Array [
+  <div
+    className="weather-widget-display"
+  >
+    <div
+      className="weather-widget-display__card"
+    >
+      <h3
+        className="weather-widget-display__title"
+      >
+        widget title
+      </h3>
+      <div
+        className="weather-widget-display__info-container"
+      >
+        <img
+          alt=""
+          src="https://openweathermap.org/img/w/someIcon.png"
+        />
+        <div
+          className="weather-widget-display__info"
+        >
+          <span>
+            Sydney
+          </span>
+          <h1
+            className="weather-widget-display__temperature"
+          >
+            0
+            <sup
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "&#176;",
+                }
+              }
+            />
+          </h1>
+          <small>
+            <strong>
+              Wind
+            </strong>
+             
+            mock wind
+            km/h
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>,
+]
+`;

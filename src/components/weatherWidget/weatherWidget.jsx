@@ -11,7 +11,7 @@ import './weatherWidget.css';
 
 class WeatherWidget extends Component {
     componentDidMount() {
-        console.log('this.props: ', this.props);
+        // console.log('this.props: ', this.props);
         // get user geolocation and weather data
         this.props.getWeatherData();
     }
